@@ -1,0 +1,56 @@
+#online shopping cart module 6
+
+CLASS ItemToPurchase:
+    METHOD __init__(item_name="none", item_price=0, item_quantity=0):
+        SET self.item_name = item_name
+        SET self.item_price = item_price
+        SET self.item_quantity = item_quantity
+
+    METHOD print_item_cost():
+        CALCULATE total_cost = self.item_price * self.item_quantity
+        PRINT self.item_name + " " + self.item_quantity + " @ $" + self.item_price + " = $" + total_cost
+
+CLASS ShoppingCart:
+    METHOD __init__(customer_name="none", current_date="January 1, 2020"):
+        SET self.customer_name = customer_name
+        SET self.current_date = current_date
+        SET self.cart_items = []
+
+    METHOD add_item(item: ItemToPurchase):
+        ADD item to self.cart_items
+
+    METHOD remove_item(item_name):
+        IF item is found in self.cart_items:
+            REMOVE item from self.cart_items
+        ELSE:
+            PRINT "Item not found in cart. Nothing removed."
+
+    METHOD modify_item(item: ItemToPurchase):
+        IF item is found in self.cart_items:
+            MODIFY the item attributes
+        ELSE:
+            PRINT "Item not found in cart. Nothing modified."
+
+    METHOD get_num_items_in_cart():
+        RETURN total number of items in self.cart_items
+
+    METHOD get_cost_of_cart():
+        CALCULATE total cost of all items in self.cart_items
+        RETURN total cost
+
+    METHOD print_total():
+        IF self.cart_items is empty:
+            PRINT "SHOPPING CART IS EMPTY"
+        ELSE:
+            PRINT cart details and total cost
+
+    METHOD print_descriptions():
+        PRINT descriptions of each item in self.cart_items
+
+BEGIN Main Program:
+    CREATE shopping_cart object with customer_name and current_date
+    PRINT MENU
+    LOOP until user inputs 'q':
+        PROMPT user for action (add, remove, modify, view, quit)
+        BASED on action, call the appropriate method from shopping_cart
+    END LOOP
